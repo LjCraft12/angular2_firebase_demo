@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule,  Routes } from '@angular/router';
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseService} from './services/firebase.service'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -11,6 +13,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { EditListingComponent } from './components/edit-listing/edit-listing.component';
 import { AddListingComponent } from './components/add-listing/add-listing.component';
+
+// Must export the config
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBpRnZ6XwLqGpilxMY0xV_FKjTK30RDKhM',
+  authDomain: 'proplistings-efd11.firebaseapp.com',
+  databaseURL: 'https://proplistings-efd11.firebaseio.com',
+  storageBucket: 'proplistings-efd11.appspot.com',
+  messagingSenderId: '964229301125'
+};
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -34,9 +45,10 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
